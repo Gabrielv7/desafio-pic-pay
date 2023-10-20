@@ -7,7 +7,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 
 ## Endpoints
-![Screenshot_2](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/1b772059-57d9-4f7f-8feb-083096f67e33)
+![Screenshot_2](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/9e3d34df-93d7-4053-84e7-99439f5209c0)
 
 
 
@@ -30,7 +30,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 
 ## Modelagem das classes de domínio
-![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/8bca4c5c-5b25-49ea-b627-f24164b10202)
+![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fb0defde-3c94-458d-8898-75d9a4e0b22c)
 
 
 
