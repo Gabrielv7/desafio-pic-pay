@@ -58,8 +58,8 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime lastUpdateDate;
 
-    public boolean userIsTypeCommon() {
-        return UserType.COMMON.equals(this.getUserType());
+    public boolean userIsTypeStore() {
+        return UserType.STORE.equals(this.getUserType());
     }
 
 }

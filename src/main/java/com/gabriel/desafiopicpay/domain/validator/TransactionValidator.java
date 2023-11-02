@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 public class TransactionValidator {
 
     public void validTransaction(User payer, Wallet payerWallet, TransactionRequest transactionRequest) {
-        if (transactionRequest.payee().equals(payer.getId())) {
+        if (payer.getId().equals(transactionRequest.payee())) {
             throw new BusinessException("usuário não pode fazer transação para ele mesmo.");
         }
-        if (!payer.userIsTypeCommon()) {
+        if (payer.userIsTypeStore()) {
             throw new BusinessException("Usuário do tipo lojista não está autorizado a realizar transações.");
         }
         if (!payerWallet.balanceIsBiggerThanZero(transactionRequest.value())) {
