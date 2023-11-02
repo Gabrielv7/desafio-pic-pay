@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @Getter
 @Builder
+@DynamicUpdate
 @Table(name = "TB_TRANSACTION")
 @Entity
 public class Transaction {
@@ -67,15 +69,6 @@ public class Transaction {
         this.user = user;
         this.creationDate = creationDate;
         this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public void updateStatusFail() {
-        this.status = StatusTransaction.FAIL;
-        this.flagEstorno = true;
-    }
-
-    public void updateStatusSuccess() {
-        this.status = StatusTransaction.SUCCESS;
     }
 
 }

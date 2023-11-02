@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
+@DynamicUpdate
 @Table(name = "TB_WALLET")
 @Entity
 public class Wallet {

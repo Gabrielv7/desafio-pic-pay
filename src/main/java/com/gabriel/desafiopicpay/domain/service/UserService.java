@@ -49,8 +49,8 @@ public class UserService {
     }
 
     private void validateCreateUser(UserRequest userRequest) {
-        if (userRepository.existsByDocument(userRequest.document()) | userRepository.existsByName(userRequest.name())
-                | userRepository.existsByEmail(userRequest.email())) {
+        if (userRepository.existsByDocument(userRequest.document()) || userRepository.existsByName(userRequest.name())
+                || userRepository.existsByEmail(userRequest.email())) {
             throw new BusinessException(MESSAGE_ERROR_DUPLICATED_DOCUMENT);
         }
     }
