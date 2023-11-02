@@ -69,8 +69,14 @@ public class Transaction {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public void update(StatusTransaction statusTransaction, Boolean flagEstorno) {
-        this.status = statusTransaction;
-        this.flagEstorno = flagEstorno;
+    public void updateStatusFail() {
+        this.status = StatusTransaction.FAIL;
+        this.flagEstorno = true;
     }
+
+    public void updateStatusSuccess() {
+        this.status = StatusTransaction.SUCCESS;
+    }
+
 }
+

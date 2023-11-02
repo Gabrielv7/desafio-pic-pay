@@ -3,32 +3,30 @@ package com.gabriel.desafiopicpay.domain.assembler;
 import com.gabriel.desafiopicpay.domain.model.Transaction;
 import com.gabriel.desafiopicpay.domain.model.User;
 import com.gabriel.desafiopicpay.domain.model.enums.StatusTransaction;
-import com.gabriel.desafiopicpay.messaging.dto.TransactionFailDTO;
+import com.gabriel.desafiopicpay.messaging.dto.TransactionDTO;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Component
 public class TransactionAssembler {
 
-    public Transaction buildTransactionSuccess(User payer, User payee, Integer value) {
+    public Transaction buildCreatedTransaction(User payer, User payee, Integer value) {
         return Transaction.builder()
                 .payer(payer.getId())
                 .payee(payee.getId())
                 .user(payer)
                 .value(value)
-                .status(StatusTransaction.SUCCESS)
+                .status(StatusTransaction.CREATED)
                 .flagEstorno(false)
                 .build();
     }
 
-    public TransactionFailDTO buildTransactionFailDTO(Integer value, User payer, User payee,
-                                                       LocalDateTime creationDateTime) {
-        return TransactionFailDTO.builder()
+
+    public TransactionDTO buildTransactionDTO(Transaction transaction, User payer, User payee) {
+        return TransactionDTO.builder()
+                .transactionId(transaction.getId())
                 .payer(payer.getId())
                 .payee(payee.getId())
-                .value(value)
-                .creationDateTime(creationDateTime)
+                .value(transaction.getValue())
                 .build();
     }
 

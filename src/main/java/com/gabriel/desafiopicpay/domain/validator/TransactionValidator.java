@@ -11,7 +11,7 @@ public class TransactionValidator {
 
     public void validTransaction(User payer, Wallet payerWallet, TransactionRequest transactionRequest) {
         if (transactionRequest.payee().equals(payer.getId())) {
-            throw new BusinessException("usuário não pode fazer transação pra ele mesmo.");
+            throw new BusinessException("usuário não pode fazer transação para ele mesmo.");
         }
         if (!payer.userIsTypeCommon()) {
             throw new BusinessException("Usuário do tipo lojista não está autorizado a realizar transações.");

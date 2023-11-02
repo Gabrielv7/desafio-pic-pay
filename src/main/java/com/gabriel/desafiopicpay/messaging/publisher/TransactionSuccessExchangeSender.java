@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class TransactionFailExchangeSender {
+public class TransactionSuccessExchangeSender {
 
     private final RabbitTemplate rabbitTemplate;
 
-    @Value("${challenge.broker.exchange.transactionFail}")
-    private String exchangeTransactionFail;
+    @Value("${challenge.broker.exchange.transactionSuccess}")
+    private String exchangeTransactionSuccess;
 
-    public void sendToExchangeTransactionFail(TransactionDTO transactionDTO) {
-        rabbitTemplate.convertAndSend(exchangeTransactionFail, "", transactionDTO);
+    public void sendExchangeTransactionSuccess(TransactionDTO transactionDTO) {
+        rabbitTemplate.convertAndSend(exchangeTransactionSuccess, "", transactionDTO);
     }
 
 }
