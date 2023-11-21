@@ -12,7 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,6 +24,9 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "TB_USER")
 @Entity
 public class User {

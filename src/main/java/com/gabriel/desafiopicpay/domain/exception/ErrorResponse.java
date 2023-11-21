@@ -16,6 +16,6 @@ public class ErrorResponse {
     private int status;
     private String error;
     private String message;
-    List<FieldError> erros;
+    List<ErrorField> erros;
 
 }

@@ -10,8 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,8 +21,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @DynamicUpdate
 @Table(name = "TB_TRANSACTION")
 @Entity
@@ -55,21 +59,6 @@ public class Transaction {
     @UpdateTimestamp
     private LocalDateTime lastUpdateDate;
 
-    protected Transaction() {
-
-    }
-
-    public Transaction(UUID id, UUID payer, UUID payee, Integer value, StatusTransaction status, Boolean flagEstorno, User user, LocalDateTime creationDate, LocalDateTime lastUpdateDate) {
-        this.id = id;
-        this.payer = payer;
-        this.payee = payee;
-        this.value = value;
-        this.status = status;
-        this.flagEstorno = flagEstorno;
-        this.user = user;
-        this.creationDate = creationDate;
-        this.lastUpdateDate = lastUpdateDate;
-    }
 
 }
 
