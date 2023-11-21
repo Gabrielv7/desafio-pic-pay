@@ -4,6 +4,7 @@ import com.gabriel.desafiopicpay.domain.dto.request.TransactionRequest;
 import com.gabriel.desafiopicpay.domain.model.Transaction;
 import com.gabriel.desafiopicpay.domain.model.User;
 import com.gabriel.desafiopicpay.domain.model.Wallet;
+import com.gabriel.desafiopicpay.domain.model.enums.StatusTransaction;
 import com.gabriel.desafiopicpay.domain.model.enums.UserType;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class ScenarioFactory {
     public static final Wallet NEW_WALLET_WITH_BALANCE_100 = newWalletWithBalance100();
     public static final Wallet NEW_WALLET_WITH_BALANCE_0 = newWalletWithBalance0();
     public static final TransactionRequest NEW_TRANSACTION_REQUEST = newTransactionRequest();
+    public static final Transaction NEW_TRANSACTION_SUCCESS = newTransactionSuccess();
 
     private static User newUserCommon() {
         return User.builder()
@@ -70,6 +72,20 @@ public class ScenarioFactory {
 
     private static TransactionRequest newTransactionRequest() {
         return new TransactionRequest(10, UUID.randomUUID(), UUID.randomUUID());
+    }
+
+    private static Transaction newTransactionSuccess() {
+        return Transaction.builder()
+                .id(UUID.randomUUID())
+                .payer(newUserCommon().getId())
+                .payee(newUserStore().getId())
+                .value(10)
+                .status(StatusTransaction.SUCCESS)
+                .flagEstorno(false)
+                .user(newUserCommon())
+                .creationDate(LocalDateTime.now())
+                .lastUpdateDate(LocalDateTime.now())
+                .build();
     }
 
  }
