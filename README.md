@@ -18,7 +18,6 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Spring Framework 3
 - Maven
 - Banco de dados relacional PostegreSQL
-- RabbitMQ para comunicação assíncrona
 
 
 
@@ -26,6 +25,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ## Funcionalidades
 - Criar usuário
 - Listar todos os usuários
+- Buscar usuário por ID
 - Criar Transação
 
 
