@@ -7,7 +7,8 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 
 ## Endpoints
-![Screenshot_2](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/9e3d34df-93d7-4053-84e7-99439f5209c0)
+![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fa0553e8-bc19-41fc-8484-38978e47907d)
+
 
 
 
@@ -18,7 +19,6 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Spring Framework 3
 - Maven
 - Banco de dados relacional PostegreSQL
-- RabbitMQ para comunicação assíncrona
 
 
 
@@ -26,6 +26,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ## Funcionalidades
 - Criar usuário
 - Listar todos os usuários
+- Buscar usuário por ID
 - Criar Transação
 
 
