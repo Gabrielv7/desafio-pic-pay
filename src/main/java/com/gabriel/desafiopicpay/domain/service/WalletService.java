@@ -21,7 +21,7 @@ public class WalletService {
     @Transactional
     public void transfer(Wallet payerWallet, Wallet payeeWallet, TransactionRequest transactionRequest) {
         payerWallet.subtract(transactionRequest.value());
-        payeeWallet.receiveTransfer(transactionRequest.value());
+        payeeWallet.sum(transactionRequest.value());
     }
 
 }

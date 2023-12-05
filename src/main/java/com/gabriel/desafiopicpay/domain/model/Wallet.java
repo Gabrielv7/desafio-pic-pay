@@ -51,7 +51,7 @@ public class Wallet {
         balance -= value;
     }
 
-    public void receiveTransfer(int value){
+    public void sum(int value){
         balance += value;
     }
 

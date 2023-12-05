@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @CrossOrigin(value = "*")
 @RestController
-@RequestMapping
+@RequestMapping("/transactions")
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -37,7 +37,7 @@ public class TransactionController {
             @ApiResponse(responseCode = "400", description = "Falha na transação",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
     })
-    @PostMapping("/transaction")
+    @PostMapping
     public ResponseEntity<TransactionResponse> createTransaction(@RequestBody @Valid TransactionRequest transactionRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transactionRequest));
     }

@@ -3,21 +3,26 @@ package com.gabriel.desafiopicpay.domain.validator;
 import com.gabriel.desafiopicpay.domain.dto.request.TransactionRequest;
 import com.gabriel.desafiopicpay.domain.exception.BusinessException;
 import com.gabriel.desafiopicpay.domain.model.User;
-import com.gabriel.desafiopicpay.domain.model.Wallet;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class TransactionValidator {
 
-    public void validTransaction(User payer, Wallet payerWallet, TransactionRequest transactionRequest) {
-        if (payer.getId().equals(transactionRequest.payee())) {
-            throw new BusinessException("usuário não pode fazer transação para ele mesmo.");
+    private final MessageSource messageSource;
+
+    public void validTransaction(User user, TransactionRequest transactionRequest) {
+        if (user.getId().equals(transactionRequest.payee())) {
+            throw new BusinessException(messageSource.getMessage("user.notAuthorized", null, LocaleContextHolder.getLocale()));
         }
-        if (payer.userIsTypeStore()) {
-            throw new BusinessException("Usuário do tipo lojista não está autorizado a realizar transações.");
+        if (user.userIsTypeStore()) {
+            throw new BusinessException(messageSource.getMessage("userType.store", null, LocaleContextHolder.getLocale()));
         }
-        if (!payerWallet.balanceIsBiggerThanZero(transactionRequest.value())) {
-            throw new BusinessException("Saldo insuficiente.");
+        if (!user.getWallet().balanceIsBiggerThanZero(transactionRequest.value())) {
+            throw new BusinessException(messageSource.getMessage("insufficient.funds", null, LocaleContextHolder.getLocale()));
         }
     }
 

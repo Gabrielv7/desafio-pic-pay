@@ -17,12 +17,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @CrossOrigin(value = "*")
@@ -56,6 +58,21 @@ public class UserController {
     public ResponseEntity<List<UserResponse>> getAll() {
         List<UserResponse> userResponseList = service.findAll().stream().map(mapper::toResponse).toList();
         return ResponseEntity.ok(userResponseList);
+    }
+
+
+    @Operation(summary = "Busca um usuário por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário encontrado",
+                    content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = UserResponse.class))}),
+            @ApiResponse(responseCode = "404", description = "usuário não existe",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getOne(@PathVariable(value = "id") UUID id) {
+        User user = service.findById(id);
+        return ResponseEntity.ok(mapper.toResponse(user));
     }
 
 

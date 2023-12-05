@@ -9,6 +9,8 @@ import com.gabriel.desafiopicpay.domain.model.Wallet;
 import com.gabriel.desafiopicpay.domain.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,16 +20,14 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private static final String MESSAGE_ERROR_DUPLICATED_DOCUMENT = "Document already exists.";
-    private static final String MESSAGE_ERROR_USER_NOT_FOUND = "User %s not found.";
-
     private final UserRepository userRepository;
     private final WalletService walletService;
     private final UserMapper mapper;
+    private final MessageSource messageSource;
 
     @Transactional
     public User save(UserRequest userRequest) {
-        validateCreateUser(userRequest);
+        validate(userRequest);
         User user = mapper.toEntity(userRequest);
         createWalletWithUser(user, userRequest.balance());
         return userRepository.save(user);
@@ -35,7 +35,7 @@ public class UserService {
 
     public User findById(UUID userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(String.format(MESSAGE_ERROR_USER_NOT_FOUND, userId)));
+                .orElseThrow(() -> new NotFoundException(String.format(messageSource.getMessage("user.not.found", null, LocaleContextHolder.getLocale()), userId)));
     }
 
     public List<User> findAll() {
@@ -48,10 +48,10 @@ public class UserService {
         user.setWallet(wallet);
     }
 
-    private void validateCreateUser(UserRequest userRequest) {
+    private void validate(UserRequest userRequest) {
         if (userRepository.existsByDocument(userRequest.document()) || userRepository.existsByName(userRequest.name())
                 || userRepository.existsByEmail(userRequest.email())) {
-            throw new BusinessException(MESSAGE_ERROR_DUPLICATED_DOCUMENT);
+            throw new BusinessException(messageSource.getMessage("user.already.exists", null, LocaleContextHolder.getLocale()));
         }
     }
 }

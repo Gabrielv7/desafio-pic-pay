@@ -27,8 +27,7 @@ public class TransactionService {
     public TransactionResponse createTransaction(TransactionRequest transactionRequest) {
         User userPayer = userService.findById(transactionRequest.payer());
         User userPayee = userService.findById(transactionRequest.payee());
-        validator.validTransaction(userPayer, userPayer.getWallet(), transactionRequest);
-        authorizedServiceClient.validateAuthorized();
+        validate(userPayer, transactionRequest);
         walletService.transfer(userPayer.getWallet(), userPayee.getWallet(), transactionRequest);
         Transaction transaction = assembler.buildCreatedTransaction(userPayer, userPayee, transactionRequest.value());
         transaction = saveTransaction(transaction);
@@ -37,6 +36,11 @@ public class TransactionService {
 
     private Transaction saveTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
+    }
+
+    private void validate(User userPayer, TransactionRequest transactionRequest) {
+        validator.validTransaction(userPayer,transactionRequest);
+        authorizedServiceClient.validateAuthorization();
     }
 
 }
