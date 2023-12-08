@@ -69,7 +69,7 @@ class UserServiceTest {
     @Test
     void Dado_um_user_id_existente_Quando_buscar_pelo_id_Entao_deve_retornar_usuario() {
 
-        when(userRepository.findById(any())).thenReturn(Optional.of(ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100));
+        when(userRepository.findById(any())).thenReturn(Optional.of(ScenarioFactory.newUserCommonWithBalance100()));
 
         User user = assertDoesNotThrow(() -> userService.findById(UUID.randomUUID()));
 
@@ -80,7 +80,7 @@ class UserServiceTest {
     void Quando_buscar_por_uma_lista_de_usuario_Entao_deve_retornar_a_lista_de_usuario() {
 
         when(userRepository.findAll())
-                .thenReturn(List.of(ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100, ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_100));
+                .thenReturn(List.of(ScenarioFactory.newUserCommonWithBalance100(), ScenarioFactory.newUserStoreWithBalance100()));
 
         List<User> users = userService.findAll();
 
@@ -94,10 +94,10 @@ class UserServiceTest {
     void Quando_criar_um_usuario_valido_Entao_deve_retornar_o_usuario_salvo() {
 
         when(userRepository.existsByDocument(anyString())).thenReturn(false);
-        when(userMapper.toEntity(any(UserRequest.class))).thenReturn(ScenarioFactory.NEW_USER_MAPPER);
-        when(userRepository.save(any(User.class))).thenReturn(ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100);
+        when(userMapper.toEntity(any(UserRequest.class))).thenReturn(ScenarioFactory.newUserMapper());
+        when(userRepository.save(any(User.class))).thenReturn(ScenarioFactory.newUserCommonWithBalance100());
 
-        User userSaved = userService.save(ScenarioFactory.NEW_USER_REQUEST);
+        User userSaved = userService.save(ScenarioFactory.newUserRequest());
 
         assertNotNull(userSaved);
         verify(userRepository, times(1)).existsByDocument(anyString());
@@ -111,7 +111,7 @@ class UserServiceTest {
         when(userRepository.existsByDocument(anyString())).thenReturn(true);
 
         assertThrows(BusinessException.class,
-                () -> userService.save(ScenarioFactory.NEW_USER_REQUEST));
+                () -> userService.save(ScenarioFactory.newUserRequest()));
 
         verify(userRepository, times(1)).existsByDocument(anyString());
         verify(userMapper, never()).toEntity(any(UserRequest.class));

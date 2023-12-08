@@ -30,14 +30,13 @@ class TransactionAssemblerTest {
 
     @BeforeEach
     void beforeEach() {
-         userPayer = ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100;
-         userPayee = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_100;
+         userPayer = ScenarioFactory.newUserCommonWithBalance100();
+         userPayee = ScenarioFactory.newUserStoreWithBalance100();
     }
 
     @Test
     void Dado_uma_criacao_de_transacao_Quando_for_construir_o_objeto_de_criacao_Entao_retornar_ele() {
-        User userPayer = ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100;
-        User userPayee = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_100;
+
         Transaction transaction = transactionAssembler
                 .buildCreatedTransaction(userPayer, userPayee, 10);
 
@@ -54,7 +53,7 @@ class TransactionAssemblerTest {
 
     @Test
     void Dado_uma_criacao_de_transacao_Quando_for_construir_o_objeto_de_retorno_Entao_retornar_ele() {
-        Transaction transaction = ScenarioFactory.NEW_TRANSACTION_SUCCESS;
+        Transaction transaction = ScenarioFactory.newTransactionSuccess();
         TransactionResponse transactionResponse = transactionAssembler.buildTransactionResponse(userPayer, userPayee, transaction);
 
         assertAll(

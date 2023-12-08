@@ -1,8 +1,8 @@
 package com.gabriel.desafiopicpay.api.client.service;
 
 import com.gabriel.desafiopicpay.api.client.AuthorizedClient;
-import com.gabriel.desafiopicpay.api.client.dto.AuthorizedResponse;
 import com.gabriel.desafiopicpay.domain.exception.BusinessException;
+import factory.ScenarioFactory;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -33,14 +33,14 @@ class AuthorizedServiceClientTest {
 
     @Test
     void Dado_a_validacao_de_autorizacao_Quando_retornar_autorizado_Entao_nao_deve_lancar_exception () {
-        when(authorizedClient.getAuthorized()).thenReturn(new AuthorizedResponse("Authorized"));
+        when(authorizedClient.getAuthorized()).thenReturn(ScenarioFactory.newAuthorizedResponseWithStatusAuthorized());
         assertDoesNotThrow(() -> authorizedServiceClient.validateAuthorization());
         verify(authorizedClient, times(1)).getAuthorized();
     }
 
     @Test
     void Dado_a_validacao_de_autorizacao_Quando_nao_retornar_autorizado_Entao_deve_lancar_exception() {
-        when(authorizedClient.getAuthorized()).thenReturn(new AuthorizedResponse("teste"));
+        when(authorizedClient.getAuthorized()).thenReturn(ScenarioFactory.newAuthorizedResponseWithStatusRandom());
         assertThrows(BusinessException.class, () -> authorizedServiceClient.validateAuthorization());
         verify(authorizedClient, times(1)).getAuthorized();
     }

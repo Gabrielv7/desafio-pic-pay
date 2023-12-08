@@ -31,7 +31,7 @@ class WalletServiceTest {
     @Test
     void Dado_uma_wallet_Quando_criar_Entao_deve_salvar() {
 
-        Wallet wallet = ScenarioFactory.NEW_WALLET_WITH_BALANCE_100;
+        Wallet wallet = ScenarioFactory.newWalletWithBalance100();
         when(walletRepository.save(any(Wallet.class))).thenReturn(wallet);
 
         walletService.create(wallet);
@@ -43,9 +43,9 @@ class WalletServiceTest {
     @Test
     void Dado_uma_wallet_Quando_transferir_Entao_deve_transferir_os_valores_entre_as_carteiras() {
 
-      Wallet payerWallet = ScenarioFactory.NEW_WALLET_WITH_BALANCE_100;
-      Wallet payeeWallet = ScenarioFactory.NEW_WALLET_WITH_BALANCE_0;
-      TransactionRequest transactionRequest = ScenarioFactory.NEW_TRANSACTION_REQUEST_WITH_VALUE_10;
+      Wallet payerWallet = ScenarioFactory.newWalletWithBalance100();
+      Wallet payeeWallet = ScenarioFactory.newWalletWithBalance0();
+      TransactionRequest transactionRequest = ScenarioFactory.newTransactionRequestWithValue10();
 
       walletService.transfer(payerWallet, payeeWallet, transactionRequest);
 

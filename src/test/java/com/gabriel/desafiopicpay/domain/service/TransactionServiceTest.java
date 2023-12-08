@@ -54,14 +54,14 @@ class TransactionServiceTest {
     @Test
     void Dado_uma_transactionRequest_valida_Quando_criar_transacao_Entao_deve_salvar() {
 
-        User payer = ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100;
-        User payee = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_0;
-        TransactionRequest transactionRequest = ScenarioFactory.NEW_TRANSACTION_REQUEST_WITH_VALUE_10;
-        Transaction transactionSuccess = ScenarioFactory.NEW_TRANSACTION_SUCCESS;
+        User payer = ScenarioFactory.newUserCommonWithBalance100();
+        User payee = ScenarioFactory.newUserStoreWithBalance0();
+        TransactionRequest transactionRequest = ScenarioFactory.newTransactionRequestWithValue10();
+        Transaction transactionSuccess = ScenarioFactory.newTransactionSuccess();
 
         when(userService.findById(transactionRequest.payer())).thenReturn(payer);
         when(userService.findById(transactionRequest.payee())).thenReturn(payee);
-        when(assembler.buildCreatedTransaction(any(), any(), any())).thenReturn(ScenarioFactory.NEW_TRANSACTION_BUILD_CREATED);
+        when(assembler.buildCreatedTransaction(any(), any(), any())).thenReturn(ScenarioFactory.newTransactionBuildCreated());
         when(transactionRepository.save(any())).thenReturn(transactionSuccess);
         when(assembler.buildTransactionResponse(any(), any(), any()))
                 .thenReturn(ScenarioFactory.newTransactionResponseDynamicParams(transactionSuccess, payer, payee));
@@ -82,9 +82,9 @@ class TransactionServiceTest {
     @Test
     void Dado_uma_transactionRequest_invalida_Quando_criar_transacao_Entao_deve_lancar_BusinessException() {
 
-        User payer = ScenarioFactory.NEW_USER_COMMON_WITH_BALANCE_100;
-        User payee = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_0;
-        TransactionRequest transactionRequest = ScenarioFactory.NEW_TRANSACTION_REQUEST_WITH_VALUE_10;
+        User payer = ScenarioFactory.newUserCommonWithBalance100();
+        User payee = ScenarioFactory.newUserCommonWithBalance0();
+        TransactionRequest transactionRequest = ScenarioFactory.newTransactionRequestWithValue10();
 
         when(userService.findById(transactionRequest.payer())).thenReturn(payer);
         when(userService.findById(transactionRequest.payee())).thenReturn(payee);
@@ -107,9 +107,9 @@ class TransactionServiceTest {
     @Test
     void Dado_uma_transactionRequest_valida_Quando_transacao_nao_for_autorizada_Entao_deve_lancar_BusinessException() {
 
-        User payer = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_100;
-        User payee = ScenarioFactory.NEW_USER_STORE_WITH_BALANCE_0;
-        TransactionRequest transactionRequest = ScenarioFactory.NEW_TRANSACTION_REQUEST_WITH_VALUE_10;
+        User payer = ScenarioFactory.newUserStoreWithBalance100();
+        User payee = ScenarioFactory.newUserCommonWithBalance0();
+        TransactionRequest transactionRequest = ScenarioFactory.newTransactionRequestWithValue10();
 
         when(userService.findById(transactionRequest.payer())).thenReturn(payer);
         when(userService.findById(transactionRequest.payee())).thenReturn(payee);
