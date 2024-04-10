@@ -3,15 +3,6 @@
 
 Essa API foi desenvolvida com base em um desafio do picpay disponivel no repositório: https://github.com/PicPay/picpay-desafio-backend.
 
-
-
-
-## Endpoints
-![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fa0553e8-bc19-41fc-8484-38978e47907d)
-
-
-
-
 ## Tecnologias
 
 - Java 17
@@ -20,14 +11,16 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Maven
 - Banco de dados relacional PostegreSQL
 
-
-
-
 ## Funcionalidades
 - Criar usuário
 - Listar todos os usuários
 - Buscar usuário por ID
 - Criar Transação
+
+
+
+## Endpoints
+![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fa0553e8-bc19-41fc-8484-38978e47907d)
 
 
 ## Modelagem das classes de domínio
