@@ -33,7 +33,7 @@ Após gerar o JAR, execute o comando para startar a aplicação:
 ```bash
 docker-compose up -d
 ```
-Pronto. Agora a documentação está acessivel para teste:
+Pronto. Agora a documentação está acessivel:
 ```bash
 http://localhost:8080/swagger-ui/index.html#/
 ```
