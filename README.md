@@ -33,10 +33,22 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ## Modelagem das classes de domínio
 ![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fb0defde-3c94-458d-8898-75d9a4e0b22c)
 
+# Docker
 
+Para subir a aplicação via docker, execute o seguinte comando maven na pasta raiz do projeto para gerar o JAR:
 
-
-## Documentação
-
-Consulte [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+```bash
+mvn package
+```
+Após gerar o JAR, execute o comando para startar a aplicação:
+```bash
+docker-compose up -d
+```
+Pronto. Agora a documentação está acessivel para teste:
+```bash
+http://localhost:8080/swagger-ui/index.html#/
+```
+Para parar a aplicação execute o comando docker:
+```bash
+docker-compose down
 
