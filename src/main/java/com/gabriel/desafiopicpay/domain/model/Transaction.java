@@ -41,7 +41,7 @@ public class Transaction {
     private UUID payee;
 
     @Column(nullable = false)
-    private Integer value;
+    private Integer amount;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -45,7 +45,7 @@ class TransactionAssemblerTest {
                 ()-> assertEquals(userPayer.getId(), transaction.getPayer()),
                 ()-> assertEquals(userPayee.getId(), transaction.getPayee()),
                 ()-> assertEquals(userPayer, transaction.getUser()),
-                ()-> assertEquals(10, transaction.getValue()),
+                ()-> assertEquals(10, transaction.getAmount()),
                 ()-> assertEquals(StatusTransaction.SUCCESS, transaction.getStatus()),
                 ()-> assertFalse(transaction.getFlagEstorno())
         );
@@ -61,7 +61,7 @@ class TransactionAssemblerTest {
                 () -> assertEquals(transaction.getId(), transactionResponse.id()),
                 () -> assertEquals(userPayer.getName(), transactionResponse.payer()),
                 () -> assertEquals(userPayee.getName(), transactionResponse.payee()),
-                () -> assertEquals(transaction.getValue(), transactionResponse.value()),
+                () -> assertEquals(transaction.getAmount(), transactionResponse.value()),
                 () -> assertEquals(StatusTransaction.SUCCESS, transactionResponse.statusTransaction())
         );
     }

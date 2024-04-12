@@ -27,9 +27,7 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @Operation(summary = "Realiza uma transação",
-            description = "Realiza uma transação por ID, payer é o id do usuário que está fazendo a transação, e payee" +
-                    "e o usuário que vai receber o valor")
+    @Operation(summary = "Realiza uma transação")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Transação feita com sucesso.",
                     content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE,

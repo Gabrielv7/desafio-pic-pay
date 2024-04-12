@@ -99,7 +99,7 @@ public class ScenarioFactory {
                 .id(UUID.randomUUID())
                 .payer(newUserCommonWithBalance100().getId())
                 .payee(newUserStoreWithBalance0().getId())
-                .value(10)
+                .amount(10)
                 .status(StatusTransaction.SUCCESS)
                 .flagEstorno(false)
                 .user(newUserCommonWithBalance100())
@@ -109,10 +109,10 @@ public class ScenarioFactory {
     }
 
     public static UserRequest newUserRequest() {
-        return new UserRequest("TONY STARK",
-                "99999999",
-                "gabriel@email.com",
-                "123456",
+        return new UserRequest("PETER PARK",
+                "44444444444",
+                "peter@email.com",
+                "peter123",
                 UserType.COMMON,
                 100);
     }
@@ -122,7 +122,7 @@ public class ScenarioFactory {
                 .payer(newUserCommonWithBalance100().getId())
                 .payee(newUserStoreWithBalance0().getId())
                 .user(newUserCommonWithBalance100())
-                .value(10)
+                .amount(10)
                 .status(StatusTransaction.SUCCESS)
                 .flagEstorno(false)
                 .build();
@@ -133,7 +133,7 @@ public class ScenarioFactory {
         return new TransactionResponse(transaction.getId(),
                 payer.getName(),
                 payee.getName(),
-                transaction.getValue(),
+                transaction.getAmount(),
                 StatusTransaction.SUCCESS);
     }
 

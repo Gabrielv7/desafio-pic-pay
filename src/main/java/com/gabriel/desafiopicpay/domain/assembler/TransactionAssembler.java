@@ -14,7 +14,7 @@ public class TransactionAssembler {
                 .payer(payer.getId())
                 .payee(payee.getId())
                 .user(payer)
-                .value(value)
+                .amount(value)
                 .status(StatusTransaction.SUCCESS)
                 .flagEstorno(false)
                 .build();
@@ -24,7 +24,7 @@ public class TransactionAssembler {
         return new TransactionResponse(transaction.getId(),
                                        payer.getName(),
                                        payee.getName(),
-                                       transaction.getValue(),
+                                       transaction.getAmount(),
                                        StatusTransaction.SUCCESS);
     }
 
