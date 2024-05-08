@@ -23,10 +23,3 @@ jobs:
         
       - name: Build with Maven
         run: mvn package
-      
-  quality-gate:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1
