@@ -23,6 +23,7 @@ jobs:
       run: mvn package
       
   quality-gate:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Official SonarQube Scan
