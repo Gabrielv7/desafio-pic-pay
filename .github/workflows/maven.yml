@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,3 +21,9 @@ jobs:
         
     - name: Build with Maven
       run: mvn package
+      
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Official SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v2.0.2
