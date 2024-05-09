@@ -2,15 +2,16 @@ name: Docker
 
 on:
   workflow_call:
+  
 jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-     - name: Docker Setup Buildx
-       uses: docker/setup-buildx-action@v3.3.0
 
-     - name: Build Docker image
-       run: docker build . --file Dockerfile --tag challange-pic-pay-api:latest
+  docker:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set Docker build
+      uses: docker/setup-buildx-action@v3.3.0
 
 
 
