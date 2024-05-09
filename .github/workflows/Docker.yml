@@ -17,4 +17,5 @@ jobs:
           cache: maven
 
       - name: Build Docker image
-        run: docker build -t challange-pic-pay-api:latest
+        run: docker build -t challange-pic-pay-api:latest.
+
