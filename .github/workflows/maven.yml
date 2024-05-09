@@ -51,3 +51,6 @@ jobs:
 
     - name: Run package
       run: mvn package -DskipTests
+  docker:
+    needs: package
+    uses: ./.github/workflows/Docker.yml
