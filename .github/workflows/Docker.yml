@@ -16,7 +16,7 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4.1.7
       with:
-        name: maven-artifact
+        name: app
         path: target/*.jar
         
     - name: Docker Login
