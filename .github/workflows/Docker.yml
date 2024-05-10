@@ -17,7 +17,7 @@ jobs:
       uses: actions/download-artifact@v4.1.7
       with:
         name: app
-        path: target/*.jar
+        path: target/
         
     - name: Docker Login
       uses: docker/login-action@v3.1.0
