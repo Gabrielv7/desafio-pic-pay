@@ -51,13 +51,12 @@ jobs:
 
     - name: Run package
       run: mvn package -DskipTests
-    
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.3
       with: 
-        name: api
-        path: app
-    # The desired behavior if no files are found using the provided path.        
+        name: maven-artifact
+        path: target/*.jar        
   docker:
     needs: package
     uses: ./.github/workflows/Docker.yml
