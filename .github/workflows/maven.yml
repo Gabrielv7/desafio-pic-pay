@@ -61,7 +61,6 @@ jobs:
           path: target/*.jar 
 
   docker:
-    name: publish DockerHub
     needs: package
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
