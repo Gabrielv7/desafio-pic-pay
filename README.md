@@ -24,7 +24,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fb0defde-3c94-458d-8898-75d9a4e0b22c)
 
 # Docker
-Para subir a aplicação via docker, execute o seguinte comando maven na pasta raiz do projeto para gerar o JAR:
+Para subir a aplicação local via docker, execute o seguinte comando maven na pasta raiz do projeto para gerar o JAR:
 
 ```bash
 mvn package
