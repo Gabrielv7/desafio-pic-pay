@@ -17,8 +17,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.UUID;
-
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -43,8 +41,6 @@ class UserControllerTest {
 
     @Autowired
     private UserMapper userMapper;
-
-    private UUID userId = UUID.fromString("1f1c42f3-74ef-4a18-84a3-f681cf56d226");
 
     @Test
     void Dado_um_novo_usuario_valido_Quando_criar_Entao_deve_retornar_http_status_201() throws Exception {
@@ -84,13 +80,14 @@ class UserControllerTest {
 
     @Test
     void Dado_uma_buscar_por_um_usuario_que_exista_Quando_buscar_Entao_deve_retornar_http_status_200() throws Exception {
-        mockMvc.perform(get("/users/{id}", userId))
+        Integer userIdExist = 15;
+        mockMvc.perform(get("/users/{id}", userIdExist))
                 .andExpect(status().isOk());
     }
 
     @Test
     void Dado_uma_buscar_por_um_usuario_inexistente_Quando_buscar_Entao_deve_retornar_http_status_404() throws Exception {
-        UUID idNotExists = UUID.randomUUID();
+        Integer idNotExists = -1;
         mockMvc.perform(get("/users/{id}", idNotExists))
                 .andExpect(status().isNotFound());
     }

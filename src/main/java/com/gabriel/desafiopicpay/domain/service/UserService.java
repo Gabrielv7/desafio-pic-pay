@@ -1,7 +1,7 @@
 package com.gabriel.desafiopicpay.domain.service;
 
-import com.gabriel.desafiopicpay.domain.exception.BusinessException;
 import com.gabriel.desafiopicpay.domain.dto.request.UserRequest;
+import com.gabriel.desafiopicpay.domain.exception.BusinessException;
 import com.gabriel.desafiopicpay.domain.exception.NotFoundException;
 import com.gabriel.desafiopicpay.domain.mapper.UserMapper;
 import com.gabriel.desafiopicpay.domain.model.User;
@@ -14,7 +14,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -33,7 +32,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(UUID userId) {
+    public User findById(Integer userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(String.format(messageSource.getMessage("user.not.found", null, LocaleContextHolder.getLocale()), userId)));
     }

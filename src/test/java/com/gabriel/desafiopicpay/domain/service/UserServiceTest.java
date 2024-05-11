@@ -19,13 +19,13 @@ import org.springframework.context.MessageSource;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.never;
@@ -62,7 +62,8 @@ class UserServiceTest {
         when(userRepository.findById(any())).thenReturn(Optional.empty());
         when(messageSource.getMessage(any(), any(), any())).thenReturn("Usuário não encontrado.");
 
-        assertThrows(NotFoundException.class, () -> userService.findById(UUID.randomUUID()));
+        Integer userIdNotExist = -1;
+        assertThrows(NotFoundException.class, () -> userService.findById(userIdNotExist));
     }
 
 
@@ -71,7 +72,7 @@ class UserServiceTest {
 
         when(userRepository.findById(any())).thenReturn(Optional.of(ScenarioFactory.newUserCommonWithBalance100()));
 
-        User user = assertDoesNotThrow(() -> userService.findById(UUID.randomUUID()));
+        User user = assertDoesNotThrow(() -> userService.findById(anyInt()));
 
         assertNotNull(user);
     }

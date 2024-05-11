@@ -35,10 +35,10 @@ public class Transaction {
     private UUID id;
 
     @Column(nullable = false)
-    private UUID payer;
+    private Integer payer;
 
     @Column(nullable = false)
-    private UUID payee;
+    private Integer payee;
 
     @Column(nullable = false)
     private Integer amount;

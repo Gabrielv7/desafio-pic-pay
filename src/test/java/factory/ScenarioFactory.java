@@ -21,7 +21,7 @@ public class ScenarioFactory {
 
     private static User.UserBuilder newUser() {
         return User.builder()
-                .id(UUID.randomUUID())
+                .id(1)
                 .name("TONY STARK")
                 .document("99999999999")
                 .email("tonystark@email.com")
@@ -91,7 +91,7 @@ public class ScenarioFactory {
     }
 
     public static TransactionRequest newTransactionRequestWithValue10() {
-        return new TransactionRequest(10, UUID.randomUUID(), UUID.randomUUID());
+        return new TransactionRequest(10, 1, 2);
     }
 
     public static Transaction newTransactionSuccess() {

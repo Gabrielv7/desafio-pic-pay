@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @CrossOrigin(value = "*")
@@ -70,7 +69,7 @@ public class UserController {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)),
     })
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getOne(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<UserResponse> getOne(@PathVariable(value = "id") Integer id) {
         User user = service.findById(id);
         return ResponseEntity.ok(mapper.toResponse(user));
     }
