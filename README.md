@@ -5,11 +5,14 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 ## Tecnologias
 
-- Java 17
-- API REST
-- Spring Framework 3
+- Java 1
 - Maven
+- API REST
+- Spring Framework
+- Spring Data JPA
 - Banco de dados relacional PostegreSQL
+- Junit | Mockito | Jacoco
+- Swagger
 
 ## Funcionalidades
 - Criar usuário
