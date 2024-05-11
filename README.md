@@ -8,7 +8,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Java 17
 - Maven
 - API REST
-- Spring Framework
+- Spring Framework 3
 - Spring Data JPA
 - Banco de dados PostegreSQL | H2
 - Junit | Mockito | Jacoco
