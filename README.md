@@ -5,7 +5,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 ## Tecnologias
 
-- Java 1
+- Java 17
 - Maven
 - API REST
 - Spring Framework
