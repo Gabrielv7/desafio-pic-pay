@@ -11,6 +11,7 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: app
+          path: target/
              
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@main
