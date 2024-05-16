@@ -30,7 +30,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            sudo yum apk add openjdk17
+             yum apk add openjdk17
             
       - name: Set JAVA_HOME and PATH
         uses: appleboy/ssh-action@v1.0.3
