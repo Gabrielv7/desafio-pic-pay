@@ -24,12 +24,7 @@ jobs:
       
       - name: Install Java
         run: |
-          sudo apt update
-          sudo apt install openjdk-17-jre -y
-          
-      - name: Set JAVA_HOME
-        run: |
-          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+          sudo yum install java-17-amazon-correto-headless
           
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
