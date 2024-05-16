@@ -32,4 +32,7 @@ jobs:
           script: |
             sudo yum install java-17-amazon-corretto-headless -y
             export DB_HOST=${{ secrets.DB_HOST }}
-            nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > nohup.out 2> nohup.err < /dev/null &
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
