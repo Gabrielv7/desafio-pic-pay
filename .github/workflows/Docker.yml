@@ -32,4 +32,14 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: gabrielv7/challange-pic-pay-api:latest
+  deploy:
+    needs: docker
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull Image from docker hub
+        run: sudo docker pull gabrielv7/challange-pic-pay-api:latest
+      - name: Delete old container
+        run: sudo docker rm -f challange-pic-pay-ap
+      - name: Run Docker Image
+        run: sudo docker run -d -p 8080:8080 --name spring-boot-app-container challange-pic-pay-api
 
