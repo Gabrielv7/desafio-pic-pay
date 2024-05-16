@@ -12,42 +12,18 @@ jobs:
         with:
           name: app
           path: target/
+             
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: /home/${{ secrets.REMOTE_USER }}/app/
+          SOURCE: target/*.jar
           
-      - name: Removendo jar antigo se existir
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            rm -rf /home/${{ secrets.REMOTE_USER }}/target 
-                    
-      - name: Copiando JAR para EC2
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: "./target/*.jar"
-          target: "/home/${{ secrets.REMOTE_USER }}/target/"
-
-      - name: Parando instancia anterior da API
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            PID=$(sudo lsof -ti :8080)
-            if [ ! -z "$PID" ]; then
-              sudo kill -9 $PID
-            fi
-
-      - name: Executando nova instancia da API
-        uses: appleboy/ssh-action@v0.1.7
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
@@ -56,4 +32,4 @@ jobs:
           script: |
             sudo yum install java-17-amazon-corretto-headless -y
             export DB_HOST=${{ secrets.DB_HOST }}
-            nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
+            nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > output.log 2>&1 &
