@@ -21,6 +21,9 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: /home/${{ secrets.REMOTE_USER }}/app/
           SOURCE: target/*.jar
+
+      - name: Update db url
+        run: sed -i 's/<db_host>/${{ secrets.DB_HOST }}/' src/main/resources/application.properties
           
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
