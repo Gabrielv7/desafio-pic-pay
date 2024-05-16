@@ -31,6 +31,7 @@ jobs:
           port: 22
           script: |
             sudo yum install java-17-openjdk-devel -y
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
             export HOST=${{ secrets.DB_HOST }}
             export PORT=8080
             nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > nohup.out 2> nohup.err < /dev/null &
