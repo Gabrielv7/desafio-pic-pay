@@ -21,9 +21,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: /home/${{ secrets.REMOTE_USER }}/app/
           SOURCE: target/*.jar
-
-      - name: Update db url
-        run: sed -i 's/<db_host>/${{ secrets.DB_HOST }}/' src/main/resources/application.properties
           
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
@@ -35,4 +32,4 @@ jobs:
           script: |
             sudo yum install java-17-amazon-corretto-headless -y
             export DB_HOST=${{ secrets.DB_HOST }}
-            nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > output.log 2>&1 &
+            nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > nohup.out 2> nohup.err < /dev/null &
