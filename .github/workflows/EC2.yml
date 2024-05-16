@@ -23,8 +23,7 @@ jobs:
           SOURCE: target/*.jar
       
       - name: Install Java
-        run: |
-          sudo yum install java-17-amazon-correto-headless
+        run: sudo yum install java-17-amazon-corretto-headless
           
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
