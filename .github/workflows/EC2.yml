@@ -1,6 +1,6 @@
 on:
   workflow_call:
-
+  
 jobs:
   EC2:
     runs-on: ubuntu-latest
@@ -21,28 +21,13 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: /home/${{ secrets.REMOTE_USER }}/app/
           SOURCE: target/*.jar
+      
+      - name: Install Java
+        run: |
+          sudo apt update
+          sudo apt install openjdk-17-jre -y
+    
           
-      - name: Install JDK
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            sudo yum install -y java-17-openjdk-devel
-            
-      - name: Set JAVA_HOME and PATH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> ~/.bashrc
-            echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
-            
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -51,6 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
+            sudo yum install java-17-openjdk-devel -y
             export HOST=${{ secrets.DB_HOST }}
             export PORT=8080
             nohup java -jar /home/${{ secrets.REMOTE_USER }}/app/*.jar > nohup.out 2> nohup.err < /dev/null &
