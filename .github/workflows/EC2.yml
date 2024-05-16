@@ -20,8 +20,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: /home/${{ secrets.REMOTE_USER }}/app
           SOURCE: target/*.jar
-          EXCLUDE: "src/test"
-         
+    
       - name: executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
         with:
