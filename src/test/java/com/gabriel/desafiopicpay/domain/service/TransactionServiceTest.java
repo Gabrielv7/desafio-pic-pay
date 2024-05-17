@@ -70,7 +70,7 @@ class TransactionServiceTest {
 
         verify(userService, times(1)).findById(transactionRequest.payer());
         verify(userService, times(1)).findById(transactionRequest.payee());
-        verify(validator, times(1)).validTransaction(any(), any());
+        verify(validator, times(1)).validateTransaction(any(), any());
         verify(authorizedServiceClient,times(1)).validateAuthorization();
         verify(assembler, times(1)).buildCreatedTransaction(any(), any(), any());
         verify(assembler, times(1)).buildTransactionResponse(any(), any(), any());
@@ -88,13 +88,13 @@ class TransactionServiceTest {
 
         when(userService.findById(transactionRequest.payer())).thenReturn(payer);
         when(userService.findById(transactionRequest.payee())).thenReturn(payee);
-        doThrow(BusinessException.class).when(validator).validTransaction(any(), any());
+        doThrow(BusinessException.class).when(validator).validateTransaction(any(), any());
 
         assertThrows(BusinessException.class, () -> transactionService.createTransaction(transactionRequest));
 
         verify(userService, times(1)).findById(transactionRequest.payer());
         verify(userService, times(1)).findById(transactionRequest.payee());
-        verify(validator, times(1)).validTransaction(any(), any());
+        verify(validator, times(1)).validateTransaction(any(), any());
         verify(authorizedServiceClient, never()).validateAuthorization();
         verify(walletService, never()).transfer(any(), any(), any());
         verify(assembler, never()).buildCreatedTransaction(any(), any(), any());
@@ -119,7 +119,7 @@ class TransactionServiceTest {
 
         verify(userService, times(1)).findById(transactionRequest.payer());
         verify(userService, times(1)).findById(transactionRequest.payee());
-        verify(validator, times(1)).validTransaction(any(), any());
+        verify(validator, times(1)).validateTransaction(any(), any());
         verify(authorizedServiceClient, times(1)).validateAuthorization();
         verify(walletService, never()).transfer(any(), any(), any());
         verify(assembler, never()).buildCreatedTransaction(any(), any(), any());

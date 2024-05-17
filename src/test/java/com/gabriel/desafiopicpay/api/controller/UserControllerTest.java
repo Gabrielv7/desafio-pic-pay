@@ -17,6 +17,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
+
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -64,7 +66,7 @@ class UserControllerTest {
     @Test
     void Dado_um_usuario_que_ja_existe_Quando_criar_Entao_deve_retornar_http_status_400() throws Exception {
         UserRequest userAlreadyExistsInTemplateSql = new UserRequest("Black Panther", "33333333333",
-                "blackpanther@email.com", "balck123", UserType.STORE, 200);
+                "blackpanther@email.com", "balck123", UserType.STORE, BigDecimal.valueOf(200));
         mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(convertToJson(userAlreadyExistsInTemplateSql))

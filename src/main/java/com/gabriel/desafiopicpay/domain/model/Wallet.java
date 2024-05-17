@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public class Wallet {
     private UUID id;
 
     @Column(nullable = false)
-    private Integer balance;
+    private BigDecimal balance;
 
     @CreationTimestamp
     private LocalDateTime creationDate;
@@ -39,20 +40,21 @@ public class Wallet {
     @UpdateTimestamp
     private LocalDateTime lastUpdateDate;
 
-    public Wallet(Integer balance){
+    public Wallet(BigDecimal balance){
         this.balance = balance;
     }
 
-    public boolean balanceIsBiggerThanZero(int value) {
-        return balance > 0 && balance >= value;
+    public boolean balanceIsBiggerThanZero(BigDecimal value) {
+        return balance.intValue() > 0 && balance.intValue() >= value.intValue();
     }
 
-    public void subtract(int value){
-        balance -= value;
+    public void subtract(BigDecimal value){
+
+        balance = balance.subtract(value);
     }
 
-    public void sum(int value){
-        balance += value;
+    public void sum(BigDecimal value){
+        balance = balance.add(value);
     }
 
 }

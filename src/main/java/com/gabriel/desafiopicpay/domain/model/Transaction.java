@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ public class Transaction {
     private Integer payee;
 
     @Column(nullable = false)
-    private Integer amount;
+    private BigDecimal amount;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

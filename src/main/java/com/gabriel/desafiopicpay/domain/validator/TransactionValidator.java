@@ -14,7 +14,7 @@ public class TransactionValidator {
 
     private final MessageSource messageSource;
 
-    public void validTransaction(User user, TransactionRequest transactionRequest) {
+    public void validateTransaction(User user, TransactionRequest transactionRequest) {
         if (user.getId().equals(transactionRequest.payee())) {
             throw new BusinessException(messageSource.getMessage("user.notAuthorized", null, LocaleContextHolder.getLocale()));
         }

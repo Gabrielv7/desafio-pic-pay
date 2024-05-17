@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -49,8 +51,8 @@ class WalletServiceTest {
 
       walletService.transfer(payerWallet, payeeWallet, transactionRequest);
 
-      Assertions.assertEquals(90, payerWallet.getBalance());
-      Assertions.assertEquals(10, payeeWallet.getBalance());
+      Assertions.assertEquals(BigDecimal.valueOf(90), payerWallet.getBalance());
+      Assertions.assertEquals(BigDecimal.valueOf(10), payeeWallet.getBalance());
     }
 
 }

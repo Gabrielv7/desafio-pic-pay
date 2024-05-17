@@ -6,10 +6,12 @@ import com.gabriel.desafiopicpay.domain.model.User;
 import com.gabriel.desafiopicpay.domain.model.enums.StatusTransaction;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class TransactionAssembler {
 
-    public Transaction buildCreatedTransaction(User payer, User payee, Integer value) {
+    public Transaction buildCreatedTransaction(User payer, User payee, BigDecimal value) {
         return Transaction.builder()
                 .payer(payer.getId())
                 .payee(payee.getId())

@@ -15,6 +15,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
+
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,7 +47,7 @@ class TransactionControllerTest {
     @Test
     void Dado_uma_transacao_valida_Quando_criar_Entao_deve_retornar_status_http_201() throws Exception {
         TransactionRequest transactionRequest =
-                new TransactionRequest(50, userTypeCommonId, userTypeStoreId);
+                new TransactionRequest(BigDecimal.TEN, userTypeCommonId, userTypeStoreId);
 
         mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -56,7 +58,7 @@ class TransactionControllerTest {
     @Test
     void Dado_uma_transacao_com_pagador_inexistente_Quando_criar_Entao_deve_retornar_status_http_404() throws Exception {
         Integer payerIdNotExist = -1;
-        TransactionRequest transactionRequest = new TransactionRequest(50, payerIdNotExist, userTypeStoreId);
+        TransactionRequest transactionRequest = new TransactionRequest(BigDecimal.TEN, payerIdNotExist, userTypeStoreId);
         mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(convertToJson(transactionRequest)))
@@ -66,7 +68,7 @@ class TransactionControllerTest {
     @Test
     void Dado_uma_transacao_com_recebedor_inexistente_Quando_criar_Entao_deve_retornar_status_http_404() throws Exception {
         Integer payeeIdNotExist = -1;
-        TransactionRequest transactionRequest = new TransactionRequest(50, userTypeCommonId, payeeIdNotExist);
+        TransactionRequest transactionRequest = new TransactionRequest(BigDecimal.TEN, userTypeCommonId, payeeIdNotExist);
         mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(convertToJson(transactionRequest)))
@@ -75,7 +77,7 @@ class TransactionControllerTest {
 
     @Test
     void Dado_uma_transacao_com_pagador_para_o_mesmo_Quando_criar_Entao_deve_retornar_status_http_400() throws Exception {
-        TransactionRequest transactionRequest = new TransactionRequest(50, userTypeCommonId, userTypeCommonId);
+        TransactionRequest transactionRequest = new TransactionRequest(BigDecimal.TEN, userTypeCommonId, userTypeCommonId);
         mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(convertToJson(transactionRequest)))
@@ -85,7 +87,7 @@ class TransactionControllerTest {
     @Test
     void Dado_uma_transacao_com_pagador_sem_saldo_Quando_criar_Entao_deve_retornar_status_http_400() throws Exception {
         Integer userTypeCommonIdWithoutBalance = 20;
-        TransactionRequest transactionRequest = new TransactionRequest(50, userTypeCommonIdWithoutBalance, userTypeCommonId);
+        TransactionRequest transactionRequest = new TransactionRequest(BigDecimal.TEN, userTypeCommonIdWithoutBalance, userTypeCommonId);
         mockMvc.perform(post("/transactions")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(convertToJson(transactionRequest)))

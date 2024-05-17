@@ -10,6 +10,7 @@ import com.gabriel.desafiopicpay.domain.model.Wallet;
 import com.gabriel.desafiopicpay.domain.model.enums.StatusTransaction;
 import com.gabriel.desafiopicpay.domain.model.enums.UserType;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -80,18 +81,18 @@ public class ScenarioFactory {
 
     public static Wallet newWalletWithBalance100() {
         return newWallet()
-                .balance(100)
+                .balance(BigDecimal.valueOf(100))
                 .build();
     }
 
     public static Wallet newWalletWithBalance0() {
         return newWallet()
-                .balance(0)
+                .balance(BigDecimal.ZERO)
                 .build();
     }
 
     public static TransactionRequest newTransactionRequestWithValue10() {
-        return new TransactionRequest(10, 1, 2);
+        return new TransactionRequest(BigDecimal.TEN, 1, 2);
     }
 
     public static Transaction newTransactionSuccess() {
@@ -99,7 +100,7 @@ public class ScenarioFactory {
                 .id(UUID.randomUUID())
                 .payer(newUserCommonWithBalance100().getId())
                 .payee(newUserStoreWithBalance0().getId())
-                .amount(10)
+                .amount(BigDecimal.TEN)
                 .status(StatusTransaction.SUCCESS)
                 .flagEstorno(false)
                 .user(newUserCommonWithBalance100())
@@ -114,7 +115,7 @@ public class ScenarioFactory {
                 "peter@email.com",
                 "peter123",
                 UserType.COMMON,
-                100);
+                BigDecimal.valueOf(100));
     }
 
     public static Transaction newTransactionBuildCreated() {
@@ -122,7 +123,7 @@ public class ScenarioFactory {
                 .payer(newUserCommonWithBalance100().getId())
                 .payee(newUserStoreWithBalance0().getId())
                 .user(newUserCommonWithBalance100())
-                .amount(10)
+                .amount(BigDecimal.TEN)
                 .status(StatusTransaction.SUCCESS)
                 .flagEstorno(false)
                 .build();

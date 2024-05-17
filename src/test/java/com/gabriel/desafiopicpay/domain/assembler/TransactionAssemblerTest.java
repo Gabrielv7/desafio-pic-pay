@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,14 +40,14 @@ class TransactionAssemblerTest {
     void Dado_uma_criacao_de_transacao_Quando_for_construir_o_objeto_de_criacao_Entao_retornar_ele() {
 
         Transaction transaction = transactionAssembler
-                .buildCreatedTransaction(userPayer, userPayee, 10);
+                .buildCreatedTransaction(userPayer, userPayee, BigDecimal.TEN);
 
         assertAll(
                 ()-> assertNotNull(transaction),
                 ()-> assertEquals(userPayer.getId(), transaction.getPayer()),
                 ()-> assertEquals(userPayee.getId(), transaction.getPayee()),
                 ()-> assertEquals(userPayer, transaction.getUser()),
-                ()-> assertEquals(10, transaction.getAmount()),
+                ()-> assertEquals(BigDecimal.TEN, transaction.getAmount()),
                 ()-> assertEquals(StatusTransaction.SUCCESS, transaction.getStatus()),
                 ()-> assertFalse(transaction.getFlagEstorno())
         );

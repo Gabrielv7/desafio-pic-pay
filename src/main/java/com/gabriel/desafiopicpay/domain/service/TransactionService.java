@@ -27,20 +27,16 @@ public class TransactionService {
     public TransactionResponse createTransaction(TransactionRequest transactionRequest) {
         User userPayer = userService.findById(transactionRequest.payer());
         User userPayee = userService.findById(transactionRequest.payee());
-        validate(userPayer, transactionRequest);
+        validator.validateTransaction(userPayer, transactionRequest);
+        authorizedServiceClient.validateAuthorization();
         walletService.transfer(userPayer.getWallet(), userPayee.getWallet(), transactionRequest);
         Transaction transaction = assembler.buildCreatedTransaction(userPayer, userPayee, transactionRequest.value());
-        transaction = saveTransaction(transaction);
-        return assembler.buildTransactionResponse(userPayer, userPayee, transaction);
+        Transaction transactionSaved = saveTransaction(transaction);
+        return assembler.buildTransactionResponse(userPayer, userPayee, transactionSaved);
     }
 
     private Transaction saveTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
-    }
-
-    private void validate(User userPayer, TransactionRequest transactionRequest) {
-        validator.validTransaction(userPayer,transactionRequest);
-        authorizedServiceClient.validateAuthorization();
     }
 
 }

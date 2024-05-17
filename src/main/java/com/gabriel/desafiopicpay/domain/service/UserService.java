@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    private void createWalletWithUser(User user, Integer balance) {
+    private void createWalletWithUser(User user, BigDecimal balance) {
         Wallet wallet = new Wallet(balance);
         walletService.create(wallet);
         user.setWallet(wallet);

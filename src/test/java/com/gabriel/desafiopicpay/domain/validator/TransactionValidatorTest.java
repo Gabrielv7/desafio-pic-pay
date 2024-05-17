@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.MessageSource;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -29,15 +31,15 @@ class TransactionValidatorTest {
     @Test
     void Dado_uma_criacao_de_transacao_Quando_usuario_tentar_transferir_para_ele_mesmo_Entao_deve_lancar_BusinessException() {
         User user = ScenarioFactory.newUserCommonWithBalance100();
-        TransactionRequest transactionRequest = new TransactionRequest(10, user.getId(), user.getId());
-        assertThrows(BusinessException.class, () -> transactionValidator.validTransaction(user, transactionRequest));
+        TransactionRequest transactionRequest = new TransactionRequest(BigDecimal.TEN, user.getId(), user.getId());
+        assertThrows(BusinessException.class, () -> transactionValidator.validateTransaction(user, transactionRequest));
 
     }
 
     @Test
     void Dado_uma_criacao_de_transacao_Quando_usuario_for_do_tipo_lojista_Entao_deve_lancar_BusinessException() {
         assertThrows(BusinessException.class,
-                () -> transactionValidator.validTransaction(
+                () -> transactionValidator.validateTransaction(
                         ScenarioFactory.newUserStoreWithBalance100(),
                         ScenarioFactory.newTransactionRequestWithValue10()));
     }
@@ -45,14 +47,14 @@ class TransactionValidatorTest {
     @Test
     void Dado_uma_criacao_de_transacao_Quando_usuario_nao_tiver_saldo_suficiente_Entao_deve_lancar_BusinessException() {
         assertThrows(BusinessException.class,
-                () -> transactionValidator.validTransaction(
+                () -> transactionValidator.validateTransaction(
                         ScenarioFactory.newUserCommonWithBalance0(),
                         ScenarioFactory.newTransactionRequestWithValue10()));
     }
 
     @Test
     void Dado_uma_criacao_de_transacao_Quando_estiver_tudo_valido_Entao_nao_deve_lancar_exception() {
-        assertDoesNotThrow(() -> transactionValidator.validTransaction(
+        assertDoesNotThrow(() -> transactionValidator.validateTransaction(
                 ScenarioFactory.newUserCommonWithBalance100(),
                 ScenarioFactory.newTransactionRequestWithValue10()));
     }
