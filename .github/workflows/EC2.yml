@@ -35,8 +35,20 @@ jobs:
             else
               echo "Java already installed"
             fi
-            export DB_HOST=${{ secrets.DB_HOST }}
-            export DB_PORT=${{ secrets.DB_PORT }}
-            export DB_USER=${{ secrets.DB_USER }}
-            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            # Exportando variáveis de ambiente
+            echo "export DB_HOST=${{ secrets.DB_HOST }}" >> ~/.bashrc
+            echo "export DB_PORT=${{ secrets.DB_PORT }}" >> ~/.bashrc
+            echo "export DB_NAME=${{ secrets.DB_NAME }}" >> ~/.bashrc
+            echo "export DB_USER=${{ secrets.DB_USER }}" >> ~/.bashrc
+            echo "export DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ~/.bashrc
+            source ~/.bashrc
+
+            # Verificando variáveis de ambiente
+            echo "DB_HOST=$DB_HOST"
+            echo "DB_PORT=$DB_PORT"
+            echo "DB_NAME=$DB_NAME"
+            echo "DB_USER=$DB_USER"
+            echo "DB_PASSWORD=$DB_PASSWORD"
+
+            # Iniciando a aplicação
             nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
