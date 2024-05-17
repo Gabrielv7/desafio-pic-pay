@@ -25,9 +25,9 @@ jobs:
       - name: Parando instancia anteiror da API
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ec2-34-230-1-40.compute-1.amazonaws.com
-          username: ec2-user
-          key: ${{ secrets.PESSOA_KEY }}
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             PID=$(sudo lsof -ti :8080)
