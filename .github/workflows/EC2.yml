@@ -51,4 +51,4 @@ jobs:
             echo "DB_PASSWORD=$DB_PASSWORD"
 
             # Iniciando a aplicação
-            nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
+            nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/desafio-pic-pay-0.0.1-SNAPSHOT.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
