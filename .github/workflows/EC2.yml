@@ -35,8 +35,4 @@ jobs:
             else
               echo "Java already installed"
             fi
-            export DB_HOST=${{ secrets.DB_HOST }}
-            export DB_PORT=${{ secrets.DB_PORT }}
-            export DB_USER=${{ secrets.DB_USER }}
-            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            nohup java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
+            nohup DB_HOST=${{ secrets.DB_HOST }} DB_PORT=${{ secrets.DB_PORT }} DB_USER=${{ secrets.DB_USER }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} java -jar /home/${{ secrets.REMOTE_USER }}/target/*.jar > /home/${{ secrets.REMOTE_USER }}/output.log 2>&1 &
