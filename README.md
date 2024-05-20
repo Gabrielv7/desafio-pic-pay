@@ -13,6 +13,8 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Banco de dados PostegreSQL | H2
 - Junit | Mockito | Jacoco
 - Swagger
+- Docker
+- EC2
 
 ## Funcionalidades
 - Criar usuário
