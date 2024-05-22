@@ -26,7 +26,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fa0553e8-bc19-41fc-8484-38978e47907d)
 
 ## Modelagem das classes de domínio
-![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/fb0defde-3c94-458d-8898-75d9a4e0b22c)
+![image](https://github.com/Gabrielv7/desafio-pic-pay/assets/53438847/8fa1386a-6710-44a4-9b55-8e32f60fc874)
 
 # Docker
 Para subir a aplicação local via docker, execute os seguintes comandos maven e docker na pasta raiz do projeto.
