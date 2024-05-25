@@ -5,6 +5,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 ## Tecnologias
 
+- CI/CD com deploy no EC2
 - Java 17
 - Maven
 - API REST
@@ -14,7 +15,8 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Junit | Mockito | Jacoco
 - Swagger
 - Docker
-- EC2
+- AWS EC2
+- AWS RDS 
 
 ## Funcionalidades
 - Criar usuário
