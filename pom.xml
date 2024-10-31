@@ -143,8 +143,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>com/gabriel/desafiopicpay/domain/model/**</exclude>
-                        <exclude>com/gabriel/desafiopicpay/domain/exception/**</exclude>
+                        <exclude>com/gabriel/desafiopicpay/domain/**</exclude>
+                        <exclude>com/gabriel/desafiopicpay/exception/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

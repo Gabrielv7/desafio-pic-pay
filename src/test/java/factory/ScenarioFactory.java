@@ -1,14 +1,14 @@
 package factory;
 
-import com.gabriel.desafiopicpay.api.client.dto.AuthorizedResponse;
-import com.gabriel.desafiopicpay.domain.dto.request.TransactionRequest;
-import com.gabriel.desafiopicpay.domain.dto.request.UserRequest;
-import com.gabriel.desafiopicpay.domain.dto.response.TransactionResponse;
-import com.gabriel.desafiopicpay.domain.model.Transaction;
-import com.gabriel.desafiopicpay.domain.model.User;
-import com.gabriel.desafiopicpay.domain.model.Wallet;
-import com.gabriel.desafiopicpay.domain.model.enums.StatusTransaction;
-import com.gabriel.desafiopicpay.domain.model.enums.UserType;
+import com.gabriel.desafiopicpay.client.dto.AuthorizedResponse;
+import com.gabriel.desafiopicpay.controller.dto.request.TransactionRequest;
+import com.gabriel.desafiopicpay.controller.dto.request.UserRequest;
+import com.gabriel.desafiopicpay.controller.dto.response.TransactionResponse;
+import com.gabriel.desafiopicpay.domain.Transaction;
+import com.gabriel.desafiopicpay.domain.User;
+import com.gabriel.desafiopicpay.domain.Wallet;
+import com.gabriel.desafiopicpay.domain.enums.StatusTransaction;
+import com.gabriel.desafiopicpay.domain.enums.UserType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
