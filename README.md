@@ -5,16 +5,17 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 
 ## Tecnologias
 
-- CI/CD com deploy no EC2
 - Java 17
 - Maven
-- API REST
+- REST
 - Spring Framework 3
 - Spring Data JPA
 - Banco de dados PostegreSQL | H2
+- FlyWay
 - Junit | Mockito | Jacoco
 - Swagger
 - Docker
+- CI/CD com deploy no EC2
 - AWS EC2
 - AWS RDS 
 
