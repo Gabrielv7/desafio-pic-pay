@@ -11,7 +11,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Spring Framework 3
 - Spring Data JPA
 - Banco de dados PostegreSQL | H2
-- FlyWay
+- FlyWay Migration
 - Junit | Mockito | Jacoco
 - Swagger
 - Docker
