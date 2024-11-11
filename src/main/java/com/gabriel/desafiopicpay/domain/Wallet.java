@@ -49,7 +49,6 @@ public class Wallet {
     }
 
     public void subtract(BigDecimal value){
-
         balance = balance.subtract(value);
     }
 

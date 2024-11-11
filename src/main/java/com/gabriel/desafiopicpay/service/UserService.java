@@ -6,9 +6,11 @@ import com.gabriel.desafiopicpay.domain.Wallet;
 import com.gabriel.desafiopicpay.exception.NotFoundException;
 import com.gabriel.desafiopicpay.mapper.UserMapper;
 import com.gabriel.desafiopicpay.repository.UserRepository;
+import com.gabriel.desafiopicpay.util.Log;
 import com.gabriel.desafiopicpay.validator.UserValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -36,7 +39,12 @@ public class UserService {
 
     public User findById(Integer userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException(String.format(messageSource.getMessage("user.not.found", null, LocaleContextHolder.getLocale()), userId)));
+                .orElseThrow(() -> {
+                            String message = String.format(messageSource.getMessage("user.not.found", null, LocaleContextHolder.getLocale()));
+                            log.error(Log.LOG_EVENT + Log.LOG_MESSAGE, "[ERROR]", message);
+                            return new NotFoundException(message);
+                        }
+                );
     }
 
     public List<User> findAll() {
