@@ -116,7 +116,7 @@ curl -X POST "http://localhost:8080/transactions" -H "Content-Type: application/
 # Docker
 Para subir a aplicação local via docker, execute os seguintes comandos maven e docker na pasta raiz do projeto.
 
-Gereo JAR da aplicação:
+Gere o JAR da aplicação:
 ```bash
 mvn package
 ```
