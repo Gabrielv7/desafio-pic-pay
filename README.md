@@ -87,10 +87,10 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 #### Criar um novo usuário
 ```bash
 curl -X POST "http://localhost:8080/users" -H "Content-Type: application/json" -d '{
-  "name": "John Doe",
+  "name": "Tony Stark",
   "document": "123456789",
-  "email": "john.doe@example.com",
-  "password": "password123",
+  "email": "tonystark@email.com",
+  "password": "tony123",
   "userType": "COMMON",
   "balance": 100.00
 }'
@@ -116,7 +116,7 @@ curl -X POST "http://localhost:8080/transactions" -H "Content-Type: application/
 # Docker
 Para subir a aplicação local via docker, execute os seguintes comandos maven e docker na pasta raiz do projeto.
 
-Gereo JAR da aplicação:
+Gere o JAR da aplicação:
 ```bash
 mvn package
 ```
