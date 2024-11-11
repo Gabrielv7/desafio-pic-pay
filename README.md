@@ -87,10 +87,10 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 #### Criar um novo usuário
 ```bash
 curl -X POST "http://localhost:8080/users" -H "Content-Type: application/json" -d '{
-  "name": "John Doe",
+  "name": "Tony Stark",
   "document": "123456789",
-  "email": "john.doe@example.com",
-  "password": "password123",
+  "email": "tonystark@email.com",
+  "password": "tony123",
   "userType": "COMMON",
   "balance": 100.00
 }'
