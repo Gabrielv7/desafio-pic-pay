@@ -17,7 +17,10 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - Docker
 - CI/CD com deploy no EC2
 - AWS EC2
-- AWS RDS 
+- AWS RDS
+
+## Modelagem das classes de domínio
+![challangepicpay](https://github.com/user-attachments/assets/60a5f79f-f094-4516-b29a-d107b539a572)
 
 ## Funcionalidades
 - Criar usuário
@@ -109,9 +112,6 @@ curl -X POST "http://localhost:8080/transactions" -H "Content-Type: application/
   "payeeId": 2
 }'
 ```
-
-## Modelagem das classes de domínio
-![challangepicpay](https://github.com/user-attachments/assets/60a5f79f-f094-4516-b29a-d107b539a572)
 
 # Docker
 Para subir a aplicação local via docker, execute os seguintes comandos maven e docker na pasta raiz do projeto.
