@@ -22,12 +22,6 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 ## Modelagem das classes de domínio
 ![challangepicpay](https://github.com/user-attachments/assets/60a5f79f-f094-4516-b29a-d107b539a572)
 
-## Funcionalidades
-- Criar usuário
-- Listar todos os usuários
-- Buscar usuário por ID
-- Criar Transação
-
 ## Endpoints
 ### Endpoints de Usuário
 
