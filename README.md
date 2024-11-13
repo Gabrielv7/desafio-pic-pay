@@ -20,7 +20,7 @@ Essa API foi desenvolvida com base em um desafio do picpay disponivel no reposit
 - AWS RDS
 
 ## Modelagem das classes de domínio
-![challangepicpay](https://github.com/user-attachments/assets/60a5f79f-f094-4516-b29a-d107b539a572)
+![Class Diagram0](https://github.com/user-attachments/assets/cf352e0d-0619-4df3-990e-ea6ec08e3df4)
 
 ## Endpoints
 ### Endpoints de Usuário
