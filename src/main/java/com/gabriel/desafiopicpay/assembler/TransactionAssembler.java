@@ -3,7 +3,6 @@ package com.gabriel.desafiopicpay.assembler;
 import com.gabriel.desafiopicpay.controller.dto.response.TransactionResponse;
 import com.gabriel.desafiopicpay.domain.Transaction;
 import com.gabriel.desafiopicpay.domain.User;
-import com.gabriel.desafiopicpay.domain.enums.StatusTransaction;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -17,8 +16,6 @@ public class TransactionAssembler {
                 .payee(payee.getId())
                 .user(payer)
                 .amount(value)
-                .status(StatusTransaction.SUCCESS)
-                .flagEstorno(false)
                 .build();
     }
 
@@ -26,8 +23,7 @@ public class TransactionAssembler {
         return new TransactionResponse(transaction.getId(),
                                        payer.getName(),
                                        payee.getName(),
-                                       transaction.getAmount(),
-                                       StatusTransaction.SUCCESS);
+                                       transaction.getAmount());
     }
 
 }

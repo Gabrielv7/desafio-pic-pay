@@ -1,10 +1,8 @@
 package com.gabriel.desafiopicpay.assembler;
 
-import com.gabriel.desafiopicpay.assembler.TransactionAssembler;
 import com.gabriel.desafiopicpay.controller.dto.response.TransactionResponse;
 import com.gabriel.desafiopicpay.domain.Transaction;
 import com.gabriel.desafiopicpay.domain.User;
-import com.gabriel.desafiopicpay.domain.enums.StatusTransaction;
 import factory.ScenarioFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -18,7 +16,6 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -48,9 +45,7 @@ class TransactionAssemblerTest {
                 ()-> assertEquals(userPayer.getId(), transaction.getPayer()),
                 ()-> assertEquals(userPayee.getId(), transaction.getPayee()),
                 ()-> assertEquals(userPayer, transaction.getUser()),
-                ()-> assertEquals(BigDecimal.TEN, transaction.getAmount()),
-                ()-> assertEquals(StatusTransaction.SUCCESS, transaction.getStatus()),
-                ()-> assertFalse(transaction.getFlagEstorno())
+                ()-> assertEquals(BigDecimal.TEN, transaction.getAmount())
         );
     }
 
@@ -64,8 +59,7 @@ class TransactionAssemblerTest {
                 () -> assertEquals(transaction.getId(), transactionResponse.id()),
                 () -> assertEquals(userPayer.getName(), transactionResponse.payer()),
                 () -> assertEquals(userPayee.getName(), transactionResponse.payee()),
-                () -> assertEquals(transaction.getAmount(), transactionResponse.value()),
-                () -> assertEquals(StatusTransaction.SUCCESS, transactionResponse.statusTransaction())
+                () -> assertEquals(transaction.getAmount(), transactionResponse.value())
         );
     }
 

@@ -1,10 +1,7 @@
 package com.gabriel.desafiopicpay.domain;
 
-import com.gabriel.desafiopicpay.domain.enums.StatusTransaction;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,13 +40,6 @@ public class Transaction {
 
     @Column(nullable = false)
     private BigDecimal amount;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private StatusTransaction status;
-
-    @Column(nullable = false)
-    private Boolean flagEstorno;
 
     @ManyToOne
     private User user;

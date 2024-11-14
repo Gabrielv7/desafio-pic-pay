@@ -34,9 +34,13 @@ public class AuthorizedServiceClient {
             throw new ServiceUnavailableException(message);
         }
 
-        if (!STATUS_AUTHORIZED.equalsIgnoreCase(request.message())) {
+        if (!isAuthorized(request)) {
             throw new BusinessException(messageSource.getMessage("transaction.not.authorized", null, LocaleContextHolder.getLocale()));
         }
+    }
+
+    private boolean isAuthorized(AuthorizedResponse request) {
+        return STATUS_AUTHORIZED.equalsIgnoreCase(request.message());
     }
 
 }

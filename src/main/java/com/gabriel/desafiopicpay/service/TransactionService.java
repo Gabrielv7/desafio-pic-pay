@@ -1,13 +1,13 @@
 package com.gabriel.desafiopicpay.service;
 
-import com.gabriel.desafiopicpay.client.service.AuthorizedServiceClient;
 import com.gabriel.desafiopicpay.assembler.TransactionAssembler;
-import com.gabriel.desafiopicpay.validator.TransactionValidator;
+import com.gabriel.desafiopicpay.client.service.AuthorizedServiceClient;
 import com.gabriel.desafiopicpay.controller.dto.request.TransactionRequest;
 import com.gabriel.desafiopicpay.controller.dto.response.TransactionResponse;
 import com.gabriel.desafiopicpay.domain.Transaction;
 import com.gabriel.desafiopicpay.domain.User;
 import com.gabriel.desafiopicpay.repository.TransactionRepository;
+import com.gabriel.desafiopicpay.validator.TransactionValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

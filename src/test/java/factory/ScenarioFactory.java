@@ -7,7 +7,6 @@ import com.gabriel.desafiopicpay.controller.dto.response.TransactionResponse;
 import com.gabriel.desafiopicpay.domain.Transaction;
 import com.gabriel.desafiopicpay.domain.User;
 import com.gabriel.desafiopicpay.domain.Wallet;
-import com.gabriel.desafiopicpay.domain.enums.StatusTransaction;
 import com.gabriel.desafiopicpay.domain.enums.UserType;
 
 import java.math.BigDecimal;
@@ -101,8 +100,6 @@ public class ScenarioFactory {
                 .payer(newUserCommonWithBalance100().getId())
                 .payee(newUserStoreWithBalance0().getId())
                 .amount(BigDecimal.TEN)
-                .status(StatusTransaction.SUCCESS)
-                .flagEstorno(false)
                 .user(newUserCommonWithBalance100())
                 .creationDate(LocalDateTime.now())
                 .lastUpdateDate(LocalDateTime.now())
@@ -124,8 +121,6 @@ public class ScenarioFactory {
                 .payee(newUserStoreWithBalance0().getId())
                 .user(newUserCommonWithBalance100())
                 .amount(BigDecimal.TEN)
-                .status(StatusTransaction.SUCCESS)
-                .flagEstorno(false)
                 .build();
     }
 
@@ -134,8 +129,7 @@ public class ScenarioFactory {
         return new TransactionResponse(transaction.getId(),
                 payer.getName(),
                 payee.getName(),
-                transaction.getAmount(),
-                StatusTransaction.SUCCESS);
+                transaction.getAmount());
     }
 
     public static AuthorizedResponse newAuthorizedResponseWithStatusAuthorized() {

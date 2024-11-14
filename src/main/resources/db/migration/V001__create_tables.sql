@@ -18,16 +18,13 @@ CREATE TABLE tb_user (
     FOREIGN KEY (wallet_id) references tb_wallet (id)
 );
 
--- Criação da tabela tb_transaction
 CREATE TABLE tb_transaction (
     id UUID PRIMARY KEY NOT NULL,
     amount NUMERIC(38, 2) NOT NULL,
     creation_date TIMESTAMP(6),
-    flag_estorno BOOLEAN NOT NULL,
     last_update_date TIMESTAMP(6),
     payee INTEGER NOT NULL,
     payer INTEGER NOT NULL,
-    status VARCHAR(255) NOT NULL,
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES tb_user (id)
 );
