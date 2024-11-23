@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -24,19 +25,26 @@ public class AuthorizedServiceClient {
 
     public void validateAuthorization() {
 
-        AuthorizedResponse request;
-
         try {
-            request = authorizedClient.getAuthorized();
+            AuthorizedResponse request = authorizedClient.getAuthorized();
+
+            if (request != null && !isAuthorized(request)) {
+                throw new BusinessException(messageSource.getMessage("transaction.not.authorized", null, LocaleContextHolder.getLocale()));
+            }
+
         } catch (FeignException e) {
-            String message = messageSource.getMessage("authorized.service.is.out", null, LocaleContextHolder.getLocale());
-            log.error(Log.LOG_EVENT + Log.LOG_MESSAGE, "[ERROR]", message);
-            throw new ServiceUnavailableException(message);
+            if (isServerError(e)) {
+                String message = messageSource.getMessage("authorized.service.is.out", null, LocaleContextHolder.getLocale());
+                log.error(Log.LOG_EVENT + Log.LOG_MESSAGE, "[ERROR]", message);
+                throw new ServiceUnavailableException(message);
+            }
         }
 
-        if (!isAuthorized(request)) {
-            throw new BusinessException(messageSource.getMessage("transaction.not.authorized", null, LocaleContextHolder.getLocale()));
-        }
+    }
+
+    private boolean isServerError(FeignException e) {
+        HttpStatus status = HttpStatus.resolve(e.status());
+        return status != null && status.is5xxServerError();
     }
 
     private boolean isAuthorized(AuthorizedResponse request) {
