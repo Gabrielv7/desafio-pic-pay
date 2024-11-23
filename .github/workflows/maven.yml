@@ -8,10 +8,24 @@ on:
       - '.github/workflows/**'
   pull_request:
     branches: [ "master" ]
-
-jobs:
-  setup-environment:
+    
+jobs:   
+  build:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn compile
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,17 +37,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-  build:
-    runs-on: ubuntu-latest
-    needs: setup-environment
-    steps:
-      - name: Build with Maven
-        run: mvn compile
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Run tests
         run: mvn test
 
@@ -41,21 +44,31 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Package application
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run package
         run: mvn package -DskipTests
 
-      - name: Upload build artifact
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.3
         with: 
           name: app
-          path: target/*.jar
+          path: target/*.jar 
 
   docker:
     needs: package
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
-
-  # deploy-ec2:
+    
+  # Deploy_EC2:
   #   needs: docker
   #   uses: ./.github/workflows/EC2.yml
   #   secrets: inherit
