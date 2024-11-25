@@ -132,11 +132,11 @@ public class ScenarioFactory {
                 transaction.getAmount());
     }
 
-    public static AuthorizedResponse newAuthorizedResponseWithStatusAuthorized() {
+    public static AuthorizedResponse newAuthorizedResponseAuthorized() {
         return new AuthorizedResponse("Authorized");
     }
 
-    public static AuthorizedResponse newAuthorizedResponseWithStatusRandom() {
+    public static AuthorizedResponse newAuthorizedResponseNotAuthorized() {
         return new AuthorizedResponse("teste");
     }
 
