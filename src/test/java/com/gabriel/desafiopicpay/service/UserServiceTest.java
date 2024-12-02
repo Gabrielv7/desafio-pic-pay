@@ -7,7 +7,8 @@ import com.gabriel.desafiopicpay.exception.NotFoundException;
 import com.gabriel.desafiopicpay.mapper.UserMapper;
 import com.gabriel.desafiopicpay.repository.UserRepository;
 import com.gabriel.desafiopicpay.repository.WalletRepository;
-import com.gabriel.desafiopicpay.validator.UserValidator;
+import com.gabriel.desafiopicpay.strategy.NewUserValidationStrategy;
+import com.gabriel.desafiopicpay.strategy.impl.ExistingNameValidationImpl;
 import factory.ScenarioFactory;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -21,9 +22,19 @@ import org.springframework.context.MessageSource;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @ExtendWith(MockitoExtension.class)
@@ -48,7 +59,7 @@ class UserServiceTest {
     WalletRepository walletRepository;
 
     @Mock
-    UserValidator validator;
+    List<NewUserValidationStrategy> validation;
 
 
     @Test
@@ -102,9 +113,18 @@ class UserServiceTest {
     @Test
     void Quando_criar_um_usuario_que_ja_existe_Entao_deve_lancar_BusinessException() {
 
-        doThrow(BusinessException.class).when(validator).validate(any(UserRequest.class));
+        NewUserValidationStrategy validation = mock(ExistingNameValidationImpl.class);
+
+        doThrow(new BusinessException("teste"))
+                .when(validation).execute(any(UserRequest.class));
+
+        List<NewUserValidationStrategy> validations = List.of(validation);
+        UserService userService = new UserService(userRepository, walletService, userMapper, messageSource, validations);
+
+        // Executando e verificando o comportamento
         assertThrows(BusinessException.class, () -> userService.save(ScenarioFactory.newUserRequest()));
 
+        // Verificando que métodos de mapeamento e salvamento não foram chamados
         verify(userMapper, never()).toEntity(any(UserRequest.class));
         verify(userRepository, never()).save(any(User.class));
     }

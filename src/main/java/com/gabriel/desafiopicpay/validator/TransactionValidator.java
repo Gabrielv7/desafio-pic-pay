@@ -24,7 +24,7 @@ public class TransactionValidator {
     }
 
     private void validateUserIfHasBalance(User user, TransactionRequest transactionRequest) {
-        if (!user.getWallet().balanceIsBiggerThanZero(transactionRequest.value())) {
+        if (!hasBalance(user, transactionRequest)) {
             throwBusinessException("insufficient.funds");
         }
     }
@@ -36,9 +36,17 @@ public class TransactionValidator {
     }
 
     private void validateUserIsNotPayee(User user, TransactionRequest transactionRequest) {
-        if (user.getId().equals(transactionRequest.payee())) {
+        if (isValidUser(user, transactionRequest)) {
           throwBusinessException("user.notAuthorized");
         }
+    }
+
+    private boolean isValidUser(User user, TransactionRequest transactionRequest) {
+        return user.getId().equals(transactionRequest.payee());
+    }
+
+    private boolean hasBalance(User user, TransactionRequest transactionRequest) {
+        return user.getWallet().balanceIsBiggerThanZero(transactionRequest.value());
     }
 
     private void throwBusinessException(String code) {
@@ -46,6 +54,5 @@ public class TransactionValidator {
         log.error(Log.LOG_EVENT + Log.LOG_MESSAGE, "[ERROR]", message);
         throw new BusinessException(messageSource.getMessage(code, null, LocaleContextHolder.getLocale()));
     }
-
 
 }

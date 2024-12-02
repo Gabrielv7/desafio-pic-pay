@@ -3,7 +3,6 @@ package com.gabriel.desafiopicpay.service;
 import com.gabriel.desafiopicpay.controller.dto.request.TransactionRequest;
 import com.gabriel.desafiopicpay.domain.Wallet;
 import com.gabriel.desafiopicpay.repository.WalletRepository;
-import com.gabriel.desafiopicpay.service.WalletService;
 import factory.ScenarioFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -37,7 +36,7 @@ class WalletServiceTest {
         Wallet wallet = ScenarioFactory.newWalletWithBalance100();
         when(walletRepository.save(any(Wallet.class))).thenReturn(wallet);
 
-        walletService.create(wallet);
+        walletService.create(BigDecimal.valueOf(100), ScenarioFactory.newUserStoreWithoutWallet());
 
         verify(walletRepository, times(1))
                 .save(any(Wallet.class));

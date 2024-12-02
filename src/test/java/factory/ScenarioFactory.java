@@ -60,6 +60,12 @@ public class ScenarioFactory {
                 .build();
     }
 
+    public static User newUserStoreWithoutWallet() {
+        return newUser()
+                .userType(UserType.STORE)
+                .build();
+    }
+
 
     public static User newUserMapper() {
         return User.builder()
